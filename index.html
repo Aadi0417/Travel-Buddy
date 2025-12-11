@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Travel Buddy | Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+</head>
+
+<body class="theme-neon">
+
+<!-- HOLOGRAM GRID -->
+<div class="holo-grid"></div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo">TL</div>
+    <div class="nav-title">TripLogger</div>
+  </div>
+
+  <nav class="nav-links">
+    <a href="index.html" class="active">Dashboard</a>
+  </nav>
+
+  <div class="nav-controls">
+    <select id="themeSelect">
+      <option value="neon">Neon</option>
+      <option value="violet">Violet</option>
+      <option value="aqua">Aqua</option>
+      <option value="forest">Forest</option>
+    </select>
+
+    <button id="modeToggle" class="theme-toggle">Light</button>
+  </div>
+</header>
+
+<div class="container fade-in">
+
+  <!-- DASHBOARD GRID -->
+  <div class="grid">
+    <!-- LEFT: STATS -->
+    <div class="card">
+      <h2>Global Stats</h2>
+
+      <div class="statsRow">
+        <div class="stat">
+          <div class="num" id="totalTrips">0</div>
+          <div class="label">Trips</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="totalPlaces">0</div>
+          <div class="label">Places</div>
+        </div>
+      </div>
+
+      <div class="statsRow">
+        <div class="stat">
+          <div class="num" id="totalItems">0</div>
+          <div class="label">Itinerary Items</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="totalImages">0</div>
+          <div class="label">Photos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: CREATE TRIP -->
+    <div class="card newTrip" id="createBox">
+      <h2>Create New Trip</h2>
+
+      <input id="name" placeholder="Trip Name">
+      <input id="location" placeholder="Location">
+
+      <div class="row">
+        <input id="start" type="date">
+        <input id="end" type="date">
+      </div>
+
+      <select id="category">
+        <option>Adventure</option>
+        <option>Solo</option>
+        <option>Family</option>
+        <option>Night</option>
+        <option>Road</option>
+      </select>
+
+      <textarea id="desc" placeholder="Short description"></textarea>
+
+      <div class="actions">
+        <button class="btn accent" onclick="createTrip()">Add Trip</button>
+        <button class="btn ghost" onclick="createQuickTrip()">Quick Add</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- FILTER + SORT -->
+  <div class="topbar">
+
+    <div class="left">
+      <input id="search" placeholder="Search trips... (Press / to focus)">
+      <kbd>/</kbd>
+    </div>
+
+    <div class="hdr-controls">
+      <select id="sort">
+        <option value="latest">Latest</option>
+        <option value="oldest">Oldest</option>
+        <option value="az">A → Z</option>
+      </select>
+
+      <input id="from" type="date">
+      <input id="to" type="date">
+      <button class="btn small" onclick="clearFilters()">Clear</button>
+      <span class="muted" id="listInfo"></span>
+    </div>
+  </div>
+
+  <!-- TRIPS LIST -->
+  <div class="card">
+    <h2>All Trips</h2>
+    <div id="tripList" class="tripList"></div>
+  </div>
+
+</div>
+
+<!-- FLOAT ACTION BUTTON -->
+<div class="fab">
+  <button class="fab-main">+</button>
+  <div class="fab-menu">
+    <button onclick="focusCreate()">📝</button>
+    <button onclick="exportAll()">📤</button>
+    <button onclick="importJSON()">📥</button>
+  </div>
+</div>
+
+<div id="toasts" class="toasts"></div>
+
+</body>
+</html>

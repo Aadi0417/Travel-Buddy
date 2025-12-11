@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trip</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="script.js"></script>
+</head>
+
+<body class="theme-neon">
+
+<div class="holo-grid small"></div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo">TL</div>
+    <div class="nav-title">Travel Buddy</div>
+  </div>
+
+  <nav class="nav-links">
+    <a href="index.html">Dashboard</a>
+  </nav>
+
+  <div class="nav-controls">
+    <select id="themeSelect">
+      <option value="neon">Neon</option>
+      <option value="violet">Violet</option>
+      <option value="aqua">Aqua</option>
+      <option value="forest">Forest</option>
+    </select>
+
+    <button id="modeToggle" class="theme-toggle">Light</button>
+  </div>
+</header>
+
+<div class="container fade-in">
+
+  <h1 id="tTitle"></h1>
+  <div class="muted" id="tSub"></div>
+
+  <br>
+
+  <div class="grid-trip">
+
+    <!-- LEFT — ITINERARY -->
+    <div class="card big">
+      <h2>Itinerary <span id="itCount"></span></h2>
+
+      <div class="row">
+        <input id="itTime" placeholder="Time (10:00 AM)">
+        <input id="itText" placeholder="Activity">
+      </div>
+
+      <button class="btn accent small" onclick="addIt()">Add Item</button>
+
+      <ul id="itList" ondragover="allowDrop(event)"></ul>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="card big">
+      <h2>Gallery</h2>
+
+      <div class="dropzone" id="dropzone">
+        Drop Images or Click  
+        <input type="file" onchange="filesPicked(this.files)" multiple>
+      </div>
+
+      <div class="gallery" id="gallery"></div>
+    </div>
+
+    <!-- RIGHT SETTINGS -->
+    <div class="card">
+      <h2>Edit Trip</h2>
+
+      <input id="eName">
+      <input id="eLoc">
+      <input id="eStart" type="date">
+      <input id="eEnd" type="date">
+      <textarea id="eDesc"></textarea>
+
+      <select id="eCat">
+        <option>Adventure</option>
+        <option>Solo</option>
+        <option>Family</option>
+        <option>Night</option>
+        <option>Road</option>
+      </select>
+
+      <br>
+
+      <button class="btn accent" onclick="saveTripEdits()">Save</button>
+      <button class="btn danger" onclick="deleteTrip()">Delete</button>
+
+      <hr style="opacity:0.2">
+
+      <button class="btn small" onclick="exportTrip()">Export JSON</button>
+      <button class="btn small" onclick="printTrip()">Export PDF</button>
+      <button class="btn small" onclick="shareTrip()">Copy JSON</button>
+      <button class="btn small" onclick="openMapPreview()">Map</button>
+
+    </div>
+  </div>
+</div>
+
+<!-- PHOTO MODAL -->
+<div id="photoModal" class="modal" onclick="closeModal(event)">
+  <button class="modalNav prev" onclick="prevPhoto(event)">‹</button>
+  <img id="modalImg">
+  <button class="modalNav next" onclick="nextPhoto(event)">›</button>
+</div>
+
+<!-- PRINT-TO-PDF AREA -->
+<div id="printArea" class="print-area"></div>
+
+<div id="toasts" class="toasts"></div>
+
+</body>
+</html>

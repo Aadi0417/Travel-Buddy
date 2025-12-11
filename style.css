@@ -1,0 +1,372 @@
+/* Neon Cyber Ultra UI — Final Master CSS */
+/* Supports Dark + Frosted Light Mode + Multi Neon Accent Themes */
+
+/* ------------------ ROOT VARIABLES ------------------ */
+:root{
+  --bg1: #020617; 
+  --bg2: #041024;
+  --cardGlass: rgba(255,255,255,0.03);
+  --muted: #9aa8c3;
+  --accent: #00e6ff;
+  --accent2:#7b61ff;
+  --danger:#ff6b6b;
+  --text: #e6f2ff;
+  --card-border: rgba(255,255,255,0.06);
+  --glass-strong: rgba(255,255,255,0.06);
+  --shadow: 0 10px 30px rgba(0,0,0,0.6);
+  --grid-opacity: 0.26;
+}
+
+/* ------------------ COLOR THEMES ------------------ */
+body.theme-neon{
+  --accent:#00e6ff;
+  --accent2:#7b61ff;
+  --tag-adventure:#ff5b63;
+  --tag-solo:#55bfff;
+  --tag-family:#ffb347;
+  --tag-night:#b57bff;
+  --tag-road:#47ff9c;
+}
+
+body.theme-violet{
+  --accent:#ff6bf2;
+  --accent2:#7b61ff;
+  --tag-adventure:#ff6b63;
+  --tag-solo:#6bd7ff;
+  --tag-family:#ffbf7a;
+  --tag-night:#d29bff;
+  --tag-road:#8cffb2;
+}
+
+body.theme-aqua{
+  --accent:#23f1b6;
+  --accent2:#00d2ff;
+  --tag-adventure:#ff6b63;
+  --tag-solo:#55d9ff;
+  --tag-family:#ffd08a;
+  --tag-night:#cfa8ff;
+  --tag-road:#34ffb2;
+}
+
+body.theme-forest{
+  --accent:#4cff9a;
+  --accent2:#2bff8a;
+  --tag-adventure:#ff8b80;
+  --tag-solo:#7fe6ff;
+  --tag-family:#ffd49a;
+  --tag-night:#cbb6ff;
+  --tag-road:#35f5a2;
+}
+
+/* ------------------ LIGHT MODE OVERRIDE ------------------ */
+body.light-mode{
+  --bg1: #f5f7fa;
+  --bg2: #eef2f6;
+  --text: #0b1822;
+  --muted: #6b7178;
+  --cardGlass: rgba(255,255,255,0.72);
+  --card-border: rgba(10,20,30,0.06);
+  --shadow: 0 8px 24px rgba(18,22,26,0.08);
+  --grid-opacity: 0.13;
+}
+
+/* ------------------ GLOBAL RESET + BACKGROUND ------------------ */
+*{ box-sizing: border-box; }
+html,body{
+  margin:0; height:100%;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(30,70,120,0.04), transparent),
+              linear-gradient(180deg,var(--bg1),var(--bg2));
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+}
+
+/* ------------------ NAVBAR ------------------ */
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 28px;
+  backdrop-filter:blur(18px);
+  background: rgba(255,255,255,0.03);
+  border-bottom:1px solid var(--card-border);
+  position:sticky; top:0; z-index:20;
+}
+
+.nav-left{ display:flex; align-items:center; gap:12px; }
+.logo{
+  width:44px; height:44px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700;
+  background: linear-gradient(135deg,var(--accent2),var(--accent));
+  color:#02142a;
+  box-shadow:0 6px 30px rgba(123,97,255,0.18);
+}
+.nav-title{ font-size:20px; font-weight:600; }
+
+.nav-links a{
+  margin:0 10px;
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  padding:6px 10px;
+  border-radius:6px;
+}
+.nav-links a.active,
+.nav-links a:hover{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#02142a;
+}
+
+.nav-controls{
+  display:flex; gap:12px; align-items:center;
+}
+
+/* ------------------ INPUTS ------------------ */
+input,select,textarea{
+  background:transparent;
+  border:1px solid var(--card-border);
+  padding:10px;
+  border-radius:10px;
+  color:var(--text);
+}
+input::placeholder, textarea::placeholder{ color:var(--muted); }
+
+/* ------------------ HOLOGRAM GRID ------------------ */
+.holo-grid{
+  position:fixed; inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:var(--grid-opacity);
+}
+.holo-grid::after{
+  content:"";
+  position:absolute; inset:-20% 0 -20% 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 60px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 60px);
+  transform:rotate(6deg);
+  filter:blur(10px);
+  mix-blend-mode:overlay;
+  animation:gridShift 24s linear infinite;
+}
+@keyframes gridShift{
+  from{ transform:translateX(0) rotate(6deg); }
+  to{ transform:translateX(-320px) rotate(6deg); }
+}
+
+/* ------------------ CONTAINER ------------------ */
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:28px;
+  position:relative;
+  z-index:2;
+}
+
+/* ------------------ CARDS ------------------ */
+.card{
+  background: var(--cardGlass);
+  padding:18px;
+  border-radius:14px;
+  border:1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  transition:0.25s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent);
+}
+
+/* ------------------ GRID LAYOUT ------------------ */
+.grid{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:18px;
+}
+.grid-trip{
+  display:grid; 
+  grid-template-columns:1fr 1fr 320px;
+  gap:18px;
+}
+
+/* ------------------ STATS ------------------ */
+.statsRow{
+  display:flex;
+  gap:12px;
+  margin-top:12px;
+}
+.stat{
+  flex:1;
+  background:rgba(255,255,255,0.02);
+  text-align:center;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--card-border);
+}
+.num{ font-size:22px; font-weight:700; color:var(--accent); }
+.label{ font-size:12px; color:var(--muted); }
+
+/* ------------------ TAGS ------------------ */
+.tag{
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  display:inline-block;
+  margin-top:6px;
+}
+.tag.Adventure{ background:#ff5b631a; color:#ff3947; }
+.tag.Solo{ background:#55bfff1a; color:#0099da; }
+.tag.Family{ background:#ffb3471a; color:#ff8a00; }
+.tag.Night{ background:#b57bff1a; color:#824bff; }
+.tag.Road{ background:#47ff9c1a; color:#00a862; }
+
+/* ------------------ BUTTONS ------------------ */
+.btn{
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid var(--card-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+  color:var(--text);
+  cursor:pointer;
+}
+.btn:hover{ opacity:0.85; }
+
+.btn.accent{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#02142a;
+  box-shadow:0 6px 24px rgba(0,230,255,0.16);
+}
+.btn.danger{ background:linear-gradient(90deg,#ff6b6b,#ff9a9a); color:#02142a; }
+.btn.small{ font-size:12px; padding:6px 10px; }
+
+/* ------------------ TRIP CARD ------------------ */
+.tripList{ max-height:520px; overflow:auto; padding-right:6px; display:flex; flex-direction:column; gap:12px; }
+.tripCard{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid var(--card-border);
+  background:linear-gradient(180deg,rgba(10,16,28,0.6),rgba(2,6,20,0.4));
+}
+body.light-mode .tripCard{
+  background:rgba(255,255,255,0.8);
+}
+
+/* mini progress */
+.progressMini{
+  height:8px; border-radius:8px;
+  background:rgba(255,255,255,0.05);
+  overflow:hidden; margin-top:8px;
+}
+.progressMini i{
+  display:block; height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+/* ------------------ ITINERARY ------------------ */
+.itList{ list-style:none; padding:0; margin-top:12px; display:flex; flex-direction:column; gap:10px; }
+.itItem{
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--card-border);
+  background:rgba(255,255,255,0.03);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.itItem.done{ opacity:0.7; text-decoration:line-through; }
+
+/* ------------------ GALLERY ------------------ */
+.gallery{ display:flex; flex-wrap:wrap; gap:10px; }
+
+.thumb img{
+  width:140px; height:92px; object-fit:cover; border-radius:10px;
+  border:1px solid var(--card-border);
+  box-shadow:0 6px 18px rgba(0,0,0,0.5);
+}
+.thumb .del{
+  position:absolute; top:6px; right:6px;
+  background:rgba(0,0,0,0.6);
+  color:white; border:none;
+  width:26px; height:26px; border-radius:50%; cursor:pointer;
+}
+
+/* ------------------ MODAL ------------------ */
+.modal{
+  position:fixed; inset:0;
+  display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.65);
+  z-index:100;
+}
+.modal img{
+  max-width:92%; max-height:88%; border-radius:10px;
+}
+.modalNav{
+  position:absolute; top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.4);
+  border:none; color:white;
+  padding:12px; border-radius:8px;
+  cursor:pointer;
+}
+.modalNav.prev{ left:18px; }
+.modalNav.next{ right:18px; }
+
+/* ------------------ FAB ------------------ */
+.fab{
+  position:fixed; right:24px; bottom:24px;
+  display:flex; flex-direction:column;
+  gap:10px; z-index:120;
+}
+.fab-main{
+  width:64px; height:64px;
+  border-radius:50%;
+  background:linear-gradient(90deg,var(--accent2),var(--accent));
+  border:none;
+  font-size:26px; font-weight:700;
+  cursor:pointer;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+}
+.fab-menu{ display:flex; flex-direction:column; gap:8px; }
+.fab-menu button{
+  width:44px; height:44px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--card-border);
+  cursor:pointer;
+}
+
+/* ------------------ TOASTS ------------------ */
+.toasts{
+  position:fixed; right:18px; bottom:18px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.toast{
+  padding:12px 16px;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent));
+  color:#02142a; font-weight:600;
+}
+
+/* ------------------ PRINT (PDF_EXPORT) ------------------ */
+.print-area{ display:none; }
+@media print{
+  body{ background:white; color:black; }
+  .navbar, .holo-grid, .fab, .toasts,
+  .tripList, .gallery, .modal, .dropzone, .btn { display:none!important; }
+  .print-area{ display:block; padding:20px; }
+}
+
+/* ------------------ ANIMATIONS ------------------ */
+.fade-in{ animation:fade .25s ease; }
+@keyframes fade{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:none; }
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media(max-width:980px){
+  .grid{ grid-template-columns:1fr; }
+  .grid-trip{ grid-template-columns:1fr; }
+  .nav-title{ font-size:16px; }
+}
